@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      context: ./kubetest
+      dockerfile: Dockerfile
+    image: kubetest:v1
+    env_file:
+      - ./kubetest/.env
+    volumes:
+      - ./kubetest/.env:/app/.env
