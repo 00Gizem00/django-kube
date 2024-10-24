@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'basic_test',
 ]
 
 MIDDLEWARE = [
@@ -75,35 +76,46 @@ WSGI_APPLICATION = 'django_kube.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DB_USERNAME = os.environ.get("POSTGRES_USER")
-DB_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
-DB_DATABASE = os.environ.get("POSTGRES_DB")
-DB_HOST = os.environ.get("POSTGRES_HOST")
-DB_PORT = os.environ.get("POSTGRES_PORT")
-DB_IS_AVAIL = all([
-    DB_USERNAME,
-    DB_PASSWORD,
-    DB_DATABASE,
-    DB_HOST,
-    DB_PORT
-])
-DB_IGNORE_SSL=os.environ.get("DB_IGNORE_SSL") == "true"
+# DB_USERNAME = os.environ.get("POSTGRES_USER")
+# DB_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+# DB_DATABASE = os.environ.get("POSTGRES_DB")
+# DB_HOST = os.environ.get("POSTGRES_HOST")
+# DB_PORT = os.environ.get("POSTGRES_PORT")
+# DB_IS_AVAIL = all([
+#     DB_USERNAME,
+#     DB_PASSWORD,
+#     DB_DATABASE,
+#     DB_HOST,
+#     DB_PORT
+# ])
+# DB_IGNORE_SSL=os.environ.get("DB_IGNORE_SSL") == "true"
 
-if DB_IS_AVAIL:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": DB_DATABASE,
-            "USER": DB_USERNAME,
-            "PASSWORD": DB_PASSWORD,
-            "HOST": DB_HOST,
-            "PORT": DB_PORT,
-        }
+# if DB_IS_AVAIL:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.postgresql",
+#             "NAME": DB_DATABASE,
+#             "USER": DB_USERNAME,
+#             "PASSWORD": DB_PASSWORD,
+#             "HOST": DB_HOST,
+#             "PORT": DB_PORT,
+#         }
+#     }
+#     if not DB_IGNORE_SSL:
+#          DATABASES["default"]["OPTIONS"] = {
+#             "sslmode": "disable"
+#          }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django_kube',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5433',
     }
-    if not DB_IGNORE_SSL:
-         DATABASES["default"]["OPTIONS"] = {
-            "sslmode": "disable"
-         }
+}
 
 
 # Password validation

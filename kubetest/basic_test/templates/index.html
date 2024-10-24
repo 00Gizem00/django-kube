@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    {%for test_model in test_models%}
+        <h1>{{ test_model.name }}</h1>
+        <p>{{ test_model.description }}</p>
+    {% endfor %}
+</body>
+</html>
