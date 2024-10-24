@@ -1,10 +1,28 @@
 services:
   web:
+    depends_on:
+      - django_kube
     build:
       context: ./kubetest
       dockerfile: Dockerfile
     image: kubetest:v1
     env_file:
       - ./kubetest/.env
+    ports:
+      - "8000:8000"
     volumes:
       - ./kubetest/.env:/app/.env
+    command: sh -c "chmod +x /app/migrate.sh && /app/migrate.sh && /app/entrypoint.sh"
+  django_kube:
+    image: postgres
+    env_file:
+      - ./kubetest/.env
+    expose:
+      - "5433"
+    ports:
+      - "5433:5433"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
